@@ -1106,7 +1106,7 @@ using UnityEngine;
             if (!multiLine)
                 return 0;
 
-            //Ä³ÖÖ´íÎóÏÂgenerator.lineCountÓëgenerator.lines.Count¿ÉÄÜ²»Ò»Ñù£¬ÒÑĞŞ¸Ä·ÀÖ¹Ô½½ç£¬2017.3
+            //æŸç§é”™è¯¯ä¸‹generator.lineCountä¸generator.lines.Countå¯èƒ½ä¸ä¸€æ ·ï¼Œå·²ä¿®æ”¹é˜²æ­¢è¶Šç•Œï¼Œ2017.3
             //for (int i = 0; i < generator.lineCount - 1; ++i)
             for (int i = 0; i < generator.lines.Count - 1; ++i)
             {
@@ -1392,11 +1392,14 @@ using UnityEngine;
 //                     UnityEngine.Debug.LogError("before:" + cachedInputTextGenerator.ToString() + ", lineCount and lines:" + cachedInputTextGenerator.lineCount + ", " + cachedInputTextGenerator.lines.Count);
                     if (cachedInputTextGenerator.lineCount != cachedInputTextGenerator.lines.Count)
                     {
-                        //Populateº¯ÊıÅ¼È»»á³öbug£¬Ôì³ÉlineCount £¡= lines.Count¡£ÈôÄÜÔÙÖ´ĞĞÒ»´ÎPopulate£¬Êı¾İ¾Í»áÕı³£
-                        //µ«Populateº¯ÊıµÄ²ÎÊı±ØĞëÓëÉÏ´Î´«ÈëµÄ²»Í¬²Å»áÖØĞÂÖ´ĞĞ£¬ËùÒÔ´Ë´¦É¾³ı×îºóÒ»¸ö×Ö¡£ÓÉÓÚ´ËÖ¡ÖĞUpdateLabel»¹»á±»µ÷ÓÃ£¬ËùÒÔÉ¾³ıÒ»¸ö×ÖÓÖ»á±»¾ÀÕı»ØÀ´
+                        //Populateå‡½æ•°å¶ç„¶ä¼šå‡ºbugï¼Œé€ æˆlineCount ï¼= lines.Countã€‚è‹¥èƒ½å†æ‰§è¡Œä¸€æ¬¡Populateï¼Œæ•°æ®å°±ä¼šæ­£å¸¸
+                        //ä½†Populateå‡½æ•°çš„å‚æ•°å¿…é¡»ä¸ä¸Šæ¬¡ä¼ å…¥çš„ä¸åŒæ‰ä¼šé‡æ–°æ‰§è¡Œï¼Œæ‰€ä»¥æ­¤å¤„åˆ é™¤æœ€åä¸€ä¸ªå­—ã€‚åˆå†æŠŠæœ€åä¸€ä¸ªå­—åŠ å›å»
                         if (processed.Length > 0)
                         {
+                            var lastChar = processed[processed.Length - 1];
                             processed = processed.Remove(processed.Length - 1);
+                            cachedInputTextGenerator.Populate(processed, settings);
+                            processed += lastChar;
                         }
                     }
                     cachedInputTextGenerator.Populate(processed, settings);                    
@@ -1428,7 +1431,7 @@ using UnityEngine;
 
         private static int GetLineStartPosition(TextGenerator gen, int line)
         {
-            if (gen.lines.Count <= 0 || line < 0) return 0;     //line¿ÉÄÜ´«Èë-1£¬·ÀÖ¹Ô½½ç 2017.3
+            if (gen.lines.Count <= 0 || line < 0) return 0;     //lineå¯èƒ½ä¼ å…¥-1ï¼Œé˜²æ­¢è¶Šç•Œ 2017.3
             line = Mathf.Clamp(line, 0, gen.lines.Count - 1);
             return gen.lines[line].startCharIdx;
         }
@@ -1481,10 +1484,10 @@ using UnityEngine;
                     int endLine = startLine;
                     drawEnd = GetLineEndPosition(gen, endLine);
 
-                    //startLine¿ÉÄÜÎª-1£¬·ÀÖ¹Ô½½ç 2017.3
+                    //startLineå¯èƒ½ä¸º-1ï¼Œé˜²æ­¢è¶Šç•Œ 2017.3
                     if (endLine < 0 || startLine < 0 || endLine >= lines.Count)
                     {
-                        //UnityEngine.Debug.LogError("InputField bug   Îª·ÀÖ¹Ô½½ç£¬ÒÑ×ö±£»¤");
+                        //UnityEngine.Debug.LogError("InputField bug   ä¸ºé˜²æ­¢è¶Šç•Œï¼Œå·²åšä¿æŠ¤");
                         return;
                     }
 
