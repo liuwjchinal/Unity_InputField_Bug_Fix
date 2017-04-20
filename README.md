@@ -1,9 +1,9 @@
 ﻿
- #Unity 4.x and 5.x edition UGUI InputField bug Fix
+ # Unity 4.x and 5.x edition UGUI InputField bug Fix
  
  download “MyInputField.cs” file and put it in your Unity script directory. Use MyInputField to replace InputFiled everywhere in your game, then you can avoid the bug. 
  
-#Unity 多个版本的InputField 控件都存在越界bug。
+# Unity 多个版本的InputField 控件都存在越界bug。
 
 仅需下载MyInputField.cs，游戏中以后都使用此控件,就能避免Unity的InputField 越界bug。（已在源码基础上改动代码，绕过了该bug。）
 
